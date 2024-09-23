@@ -1,0 +1,22 @@
+/* Reset Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* General Styles */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Lexend', sans-serif;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Common Styles */
