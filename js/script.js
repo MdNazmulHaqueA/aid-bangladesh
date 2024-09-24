@@ -54,18 +54,32 @@ function calculateTotal(inputValue) {
   availableFunds.textContent = totalFunds;
 }
 
-function updateDonation(card) {
+function addHistoryItem(amount, campaignTitle) { 
+  const historyItem = `
+    <div class="history-item">
+       <h5>${amount} Taka is donated for ${campaignTitle}</h5>
+       <p>Date: ${new Date().toString()}</p>
+    </div>
+  `;
+  historyContainer.innerHTML += historyItem;
+}
+
+function updateDonationAndDonateHistory(card) {
   const input = card.querySelector('.donate-input');
   const amountElement = card.querySelector('.donation-status span');
+  const campaignTitle = card.querySelector(
+    '.donation-card-content h5'
+  ).textContent;
   const inputValue = Number(input.value);
   if (validateInputValue(inputValue)) {
     let currentDonation = Number(amountElement.textContent);
     currentDonation += inputValue;
     amountElement.textContent = currentDonation;
     calculateTotal(inputValue);
+    addHistoryItem(inputValue, campaignTitle);
     input.value = '';
-  }else{
-   input.value = '';
+  } else {
+    input.value = '';
   }
 }
 
@@ -89,6 +103,6 @@ historyButton.addEventListener('click', function () {
 document.querySelectorAll('.donation-card').forEach(card => {
   const donateButton = card.querySelector('button');
   donateButton.addEventListener('click', function () {
-    updateDonation(card);
+    updateDonationAndDonateHistory(card);
   });
 });
