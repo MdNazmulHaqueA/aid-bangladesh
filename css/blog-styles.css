@@ -28,3 +28,12 @@ h2 {
 .open .faq-answer {
   display: block;
 }
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+.link-back-home {
+  margin-top: 2rem;
+}
