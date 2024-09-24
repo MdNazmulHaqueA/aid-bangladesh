@@ -166,6 +166,47 @@ main {
   margin-bottom: 0;
 }
 
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f9f7f3;
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 4rem 8rem;
+  pointer-events: all;
+  z-index: 1000;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+.btn-close {
+  background: #f22626;
+  border: none;
+  color: #fff;
+}
+body.modal-open * {
+  user-select: none;
+}
+#main-content.modal-blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
+
 /* Footer Styles */
 footer {
   background-color: #f9f7f3;

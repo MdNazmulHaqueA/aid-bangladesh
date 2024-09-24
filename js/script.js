@@ -7,6 +7,11 @@ const campaignContainer = document.getElementById('campaign-container');
 const historyContainer = document.getElementById('history-container');
 const availableFunds = document.getElementById('fund-available');
 const donationCards = document.querySelectorAll('.donation-card-content');
+const modal = document.getElementById('donation-modal');
+const closeModalButton = document.getElementById('close-modal');
+const overlay = document.querySelector('.modal-overlay');
+const mainContent = document.getElementById('main-content');
+
 
 // Default Behavior or values
 historyContainer.style.display = 'none';
@@ -64,6 +69,19 @@ function addHistoryItem(amount, campaignTitle) {
   historyContainer.innerHTML += historyItem;
 }
 
+function showModal() {
+  modal.style.display = 'flex';
+  overlay.style.display = 'block';
+  mainContent.classList.add('modal-blur');  
+}
+
+function hideModal() {
+  modal.style.display = 'none';
+  overlay.style.display = 'none';
+  mainContent.classList.remove('modal-blur');
+}
+
+
 function updateDonationAndDonateHistory(card) {
   const input = card.querySelector('.donate-input');
   const amountElement = card.querySelector('.donation-status span');
@@ -77,6 +95,7 @@ function updateDonationAndDonateHistory(card) {
     amountElement.textContent = currentDonation;
     calculateTotal(inputValue);
     addHistoryItem(inputValue, campaignTitle);
+    showModal();
     input.value = '';
   } else {
     input.value = '';
@@ -106,3 +125,4 @@ document.querySelectorAll('.donation-card').forEach(card => {
     updateDonationAndDonateHistory(card);
   });
 });
+closeModalButton.addEventListener('click', hideModal);

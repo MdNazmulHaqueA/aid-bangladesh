@@ -36,7 +36,7 @@
         </button>
       </section>
     </header>
-    <main>
+    <main id="main-content">
       <section id="campaign-container" class="donation-campaigns">
         <!-- Card Start -->
         <div class="donation-card">
@@ -133,6 +133,18 @@
       </section>
       <section id="history-container"></section>
     </main>
+    <!-- Modal Overlay -->
+    <div class="modal-overlay"></div>
+    <!-- Modal -->
+    <section class="modal" id="donation-modal" style="display: none">
+      <h2>Congrats!!</h2>
+      <img src="images/coin.png" alt="dollar image" />
+      <p>You have donated for mankind</p>
+      <h5>Successfully!</h5>
+      <button class="btn btn-close pad-small" id="close-modal">
+        Close Confirmation
+      </button>
+    </section>
     <footer>
       <p>
         All right reserved &copy;Aid Bangladesh - Developed by Md Nazmul Haque
