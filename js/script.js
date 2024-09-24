@@ -18,6 +18,7 @@ historyContainer.style.display = 'none';
 donationButton.classList.add('btn-primary');
 historyButton.classList.add('btn-outlined');
 
+// calculating initial available funds based on donated amount
 function calculateInitialDonations() {
   let initialDonations = 0;
   donationCards.forEach(card => {
@@ -81,7 +82,6 @@ function hideModal() {
   mainContent.classList.remove('modal-blur');
 }
 
-
 function updateDonationAndDonateHistory(card) {
   const input = card.querySelector('.donate-input');
   const amountElement = card.querySelector('.donation-status span');
@@ -111,6 +111,7 @@ donationButton.addEventListener('click', function () {
     historyButton
   );
 });
+
 historyButton.addEventListener('click', function () {
   toggleTabs(
     historyContainer,
@@ -119,10 +120,12 @@ historyButton.addEventListener('click', function () {
     donationButton
   );
 });
+
 document.querySelectorAll('.donation-card').forEach(card => {
   const donateButton = card.querySelector('button');
   donateButton.addEventListener('click', function () {
     updateDonationAndDonateHistory(card);
   });
 });
+
 closeModalButton.addEventListener('click', hideModal);
