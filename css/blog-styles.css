@@ -37,3 +37,13 @@ a {
 .link-back-home {
   margin-top: 2rem;
 }
+
+/* responsive styles */
+@media all and (max-width: 440px) {
+  h2 {
+    margin-bottom: 2rem;
+  }
+  .link-back-home {
+    margin-top: 3rem;
+  }
+}

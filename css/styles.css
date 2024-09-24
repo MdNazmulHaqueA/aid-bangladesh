@@ -95,7 +95,7 @@ header {
   display: flex;
   justify-content: center;
   gap: 1.25rem;
-  margin-top: 80px;
+  margin-top: 40px;
   margin-bottom: 40px;
 }
 
@@ -183,6 +183,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 1rem;
   background-color: #f9f7f3;
   border-radius: 1rem;
@@ -222,4 +223,71 @@ footer {
   justify-content: center;
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+/* Responsive Styles */
+@media all and (max-width: 992px) {
+  .modal {
+    padding: 2rem 4rem;
+  }
+}
+@media all and (max-width: 768px) {
+  .page-intro {
+    padding: 2rem;
+  }
+  main {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .donation-card {
+    flex-direction: column;
+  }
+  .donation-card-img {
+    max-width: 100%;
+  }
+  .modal {
+    padding: 4rem 2rem;
+  }
+}
+
+@media all and (max-width: 576px) {
+  .page-intro {
+    padding: 1.25rem;
+  }
+  main {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .page-intro {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 40px;
+  }
+  .brand img {
+    width: 50px;
+    height: 50px;
+  }
+  .modal {
+    padding: 2rem 1rem;
+  }
+  footer p {
+    width: 60%;
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 440px) {
+  .actions {
+    flex-direction: column;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .h5 {
+    font-size: 1rem;
+  }
 }
