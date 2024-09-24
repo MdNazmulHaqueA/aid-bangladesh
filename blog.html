@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | DOM QnA</title>
+    <!-- Linking Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Linking Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/blog-styles.css" />
+  </head>
+  <body>
+    <header>
+      <section class="page-intro">
+        <a id="blog" href="blog.html" class="btn btn-primary">Blog</a>
+        <div class="brand">
+          <img src="images/logo.png" alt="logo" />
+          <h5>Aid Bangladesh</h5>
+        </div>
+        <div class="funds">
+          <img src="images/coin.png" alt="Dollar Logo" />
+          <h6><span id="fund-available">5500</span> BDT</h6>
+        </div>
+      </section>
+    </header>
+    <main>
+      <h2>Frequently Asked Questions</h2>
+      <section class="faq">
+        <div class="faq-container">
+          <h5 class="faq-question">What is the Document Object Model (DOM)?</h5>
+          <p class="faq-answer">
+            DOM (Document Object Model) is a programming interface that
+            represents an HTML document as a tree of objects.
+          </p>
+        </div>
+
+        <div class="faq-container">
+          <h5 class="faq-question">
+            How do you select an element from the DOM?
+          </h5>
+          <p class="faq-answer">
+            We can select elements from the DOM using methods provided by the
+            `document` object. For instance:getElementById('id'),
+            querySelector('selector'), querySelectorAll('selector'),
+            getElementsByClassName('className'),
+            document.getElementsByTagName('tagName') etc.
+          </p>
+        </div>
+
+        <div class="faq-container">
+          <h5 class="faq-question">
+            What is event delegation in the context of the DOM, and why is it
+            useful?
+          </h5>
+          <p class="faq-answer">
+            Event delegation is attaching an event listener to a parent element
+            to handle events for all its child elements. This reduces code
+            redundancy, event handlers, and memory consumption.
+          </p>
+        </div>
+
+        <div class="faq-container">
+          <h5 class="faq-question">
+            How do you manipulate an element's attributes and styles using the
+            DOM?
+          </h5>
+
+          <p class="faq-answer">
+            We can manipulate an element's attributes and styles using
+            getAttribute(), setAttribute(), classList.add(), classList.remove(),
+            classList.toggle() methods etc.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>
+        All right reserved &copy;Aid Bangladesh - Developed by Md Nazmul Haque
+      </p>
+    </footer>
+
+    <!-- Linking Custom JavaScript -->
+    <script src="js/blog-script.js"></script>
+  </body>
+</html>
