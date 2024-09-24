@@ -78,7 +78,7 @@ h6 span {
   text-decoration: none;
 }
 .brand,
-.fund-collected {
+.funds {
   display: flex;
   align-items: center;
   justify-content: center;
