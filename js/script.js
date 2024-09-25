@@ -1,39 +1,38 @@
+// common functions are: getHtmlElement, selectHtmlElement, toggleTabs, toggleModal, updateAvailableFunds
+// updateDonationAndDonateHistory function can be considered as a common function because it is used inside a loop. Consequently, the functions inside the updateDonationAndDonateHistory are also reused
+
 let totalFunds = 5500;
 
-// Selecting DOM Elements
-const donationButton = document.getElementById('donation-btn');
-const historyButton = document.getElementById('history-btn');
-const campaignContainer = document.getElementById('campaign-container');
-const historyContainer = document.getElementById('history-container');
-const availableFunds = document.getElementById('fund-available');
-const donationCards = document.querySelectorAll('.donation-card-content');
-const modal = document.getElementById('donation-modal');
-const closeModalButton = document.getElementById('close-modal');
-const overlay = document.querySelector('.modal-overlay');
-const mainContent = document.getElementById('main-content');
-
-
-// Default Behavior or values
-historyContainer.style.display = 'none';
-donationButton.classList.add('btn-primary');
-historyButton.classList.add('btn-outlined');
-
-// calculating initial available funds based on donated amount
-function calculateInitialDonations() {
-  let initialDonations = 0;
-  donationCards.forEach(card => {
-    const amountElement = card.querySelector('.donation-status span');
-    initialDonations += Number(amountElement.textContent);
-  });
-  return initialDonations;
+// common functions
+function getHtmlElementById(id) {
+  return document.getElementById(id);
 }
-totalFunds  -= calculateInitialDonations();
-availableFunds.textContent = totalFunds;
+function selectHtmlElementByQuery(selector, isAll = false) {
+  return isAll
+    ? document.querySelectorAll(selector)
+    : document.querySelector(selector);
+}
+
+// Selecting DOM Elements
+const donationButton = getHtmlElementById('donation-btn');
+const historyButton = getHtmlElementById('history-btn');
+const campaignContainer = getHtmlElementById('campaign-container');
+const historyContainer = getHtmlElementById('history-container');
+const availableFunds = getHtmlElementById('fund-available');
+const donationCards = selectHtmlElementByQuery('.donation-card-content', true);
+const modal = getHtmlElementById('donation-modal');
+const closeModalButton = getHtmlElementById('close-modal');
+const overlay = selectHtmlElementByQuery('.modal-overlay');
+const mainContent = getHtmlElementById('main-content');
 
 // helper functions
-function toggleTabs(showElement, hideElement, activeButton, inactiveButton) {
-  const isCurrentlyVisible = showElement.style.display === 'block';
-  if (!isCurrentlyVisible) {
+function toggleTabs({
+  showElement,
+  hideElement,
+  activeButton,
+  inactiveButton
+}) {
+  if (showElement.style.display !== 'block') {
     showElement.style.display = 'block';
     hideElement.style.display = 'none';
     activeButton.classList.add('btn-primary');
@@ -55,12 +54,21 @@ function validateInputValue(val) {
   return true;
 }
 
-function calculateTotal(inputValue) {
-  totalFunds -= inputValue;
+// initial fund calculation and post-donation fund update
+function updateAvailableFunds(donationAmount = 0) {
+  if (donationAmount === 0) {
+    donationCards.forEach(card => {
+      const amountElement = card.querySelector('.donation-status span');
+      totalFunds -= Number(amountElement.textContent);
+    });
+  } else {
+    totalFunds -= donationAmount;
+  }
   availableFunds.textContent = totalFunds;
 }
+updateAvailableFunds();
 
-function addHistoryItem(amount, campaignTitle) { 
+function addHistoryItem(amount, campaignTitle) {
   const historyItem = `
     <div class="history-item">
        <h5>${amount} Taka is donated for ${campaignTitle}</h5>
@@ -70,16 +78,10 @@ function addHistoryItem(amount, campaignTitle) {
   historyContainer.innerHTML += historyItem;
 }
 
-function showModal() {
-  modal.style.display = 'flex';
-  overlay.style.display = 'block';
-  mainContent.classList.add('modal-blur');  
-}
-
-function hideModal() {
-  modal.style.display = 'none';
-  overlay.style.display = 'none';
-  mainContent.classList.remove('modal-blur');
+function toggleModal(isVisible) {
+  modal.style.display = isVisible ? 'flex' : 'none';
+  overlay.style.display = isVisible ? 'block' : 'none';
+  mainContent.classList.toggle('modal-blur', isVisible);
 }
 
 function updateDonationAndDonateHistory(card) {
@@ -93,9 +95,9 @@ function updateDonationAndDonateHistory(card) {
     let currentDonation = Number(amountElement.textContent);
     currentDonation += inputValue;
     amountElement.textContent = currentDonation;
-    calculateTotal(inputValue);
+    updateAvailableFunds(inputValue);
     addHistoryItem(inputValue, campaignTitle);
-    showModal();
+    toggleModal(true);
     input.value = '';
   } else {
     input.value = '';
@@ -103,29 +105,26 @@ function updateDonationAndDonateHistory(card) {
 }
 
 // Event Listeners
-donationButton.addEventListener('click', function () {
-  toggleTabs(
-    campaignContainer,
-    historyContainer,
-    donationButton,
-    historyButton
-  );
+donationButton.addEventListener('click', () => {
+  toggleTabs({
+    showElement: campaignContainer,
+    hideElement: historyContainer,
+    activeButton: donationButton,
+    inactiveButton: historyButton
+  });
 });
-
-historyButton.addEventListener('click', function () {
-  toggleTabs(
-    historyContainer,
-    campaignContainer,
-    historyButton,
-    donationButton
-  );
+historyButton.addEventListener('click', () => {
+  toggleTabs({
+    showElement: historyContainer,
+    hideElement: campaignContainer,
+    activeButton: historyButton,
+    inactiveButton: donationButton
+  });
 });
-
 document.querySelectorAll('.donation-card').forEach(card => {
   const donateButton = card.querySelector('button');
   donateButton.addEventListener('click', function () {
     updateDonationAndDonateHistory(card);
   });
 });
-
-closeModalButton.addEventListener('click', hideModal);
+closeModalButton.addEventListener('click', () => toggleModal(false));

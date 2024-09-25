@@ -155,6 +155,7 @@ main {
 
 /* History Styles */
 #history-container {
+  display: none;
   margin-top: 40px;
 }
 .history-item {
