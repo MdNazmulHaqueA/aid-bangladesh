@@ -54,7 +54,7 @@ function validateInputValue(val) {
   return true;
 }
 
-// initial fund calculation and post-donation fund update
+// initial fund calculation and post-donation fund updater function
 function updateAvailableFunds(donationAmount = 0) {
   if (donationAmount === 0) {
     donationCards.forEach(card => {
